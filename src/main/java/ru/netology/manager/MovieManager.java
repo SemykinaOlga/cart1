@@ -1,9 +1,15 @@
 package ru.netology.manager;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import ru.netology.domain.Movie;
+
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class MovieManager {
     private Movie[] items = new Movie[0];
+    int amountOfFilms = 10;
 
     public void add(Movie item) {
         // создаём новый массив размером на единицу больше
@@ -16,29 +22,17 @@ public class MovieManager {
         items = tmp;
     }
 
-    public Movie[] getLastFilm(int amountfilm) {
-        //Movie[] result = new Movie[items.length];
-        // перебираем массив в прямом порядке
-        // но кладём в результаты в обратном
-        int amount;
-        if (
-                items.length <= amountfilm){
-            Movie[] result = new Movie[items.length];
-            for (int i = 0; i < result.length; i++) {
+    public Movie[] getLastFilm() {
+        int howManyFilmsToShow = amountOfFilms;
+        if (items.length <= amountOfFilms) {
+            howManyFilmsToShow = items.length;
+        }
+        Movie[] result = new Movie[howManyFilmsToShow];
+        for (int i = 0; i < result.length; i++) {
             int index = items.length - i - 1;
             result[i] = items[index];
         }
-        return result;}
-
-        else {
-            Movie[] result = new Movie[amountfilm];
-            for (int i = 0; i < amountfilm; i++) {
-                int index = items.length - i - 1;
-
-                result[i] = items[index];
-            }
-            return result;}
+        return result;
     }
-
-
 }
+
